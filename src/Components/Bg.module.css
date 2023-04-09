@@ -1,0 +1,20 @@
+/* .main{
+    display: flex;
+    
+} */
+
+
+.bg{
+    background-color: gray;
+    color: white;
+    min-height: 10rem;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+
+.btn{
+    margin-top: 8rem;
+    /* margin-right: 10rem; */
+}

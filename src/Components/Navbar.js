@@ -1,26 +1,72 @@
-import React from 'react';
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import React,{useState,useEffect} from 'react'
+import {useLocation,NavLink,Outlet} from 'react-router-dom';
+import { Navbar, Container } from 'react-bootstrap';
+import Cart from './Cart/Cart';
+import Bg from "./Bg";
+// import Footer from "../Components/Footer";
 
-export default function TopNavigation() {
+
+const NavBar = () => {
+  const [store, setIsStore] = useState(false);
+
+  const location = useLocation();
+  useEffect(() => {
+   
+    // console.log(location)
+    if (location.pathname === '/') setIsStore(true);
+    else setIsStore(false);
+  }, [location]);
+  
   return (
     <>
-      <Navbar bg="black" expand="sm" variant="dark">      
-        <Container>
-          <Nav className="mx-auto">
-            <Nav.Link href="#home" variant="light" className="mx-5">Home</Nav.Link>
-            <Nav.Link href="#features" variant="light" className="mx-5">STORE</Nav.Link>
-            <Nav.Link href="#pricing" variant="light">ABOUT</Nav.Link>
-          </Nav>
-          <Button variant="outline-light" className="bg-black">Cart 0</Button>
+      <Navbar className="sticky-top " bg="black" expand="lg" variant="dark">
+        <Container className="d-flex justify-content-center ">
+          <Navbar.Brand className="mx-4">
+            <NavLink
+              to="/home"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              HOME
+            </NavLink>
+          </Navbar.Brand>
+          <Navbar.Brand className="mx-4">
+            <NavLink
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              STORE
+            </NavLink>
+          </Navbar.Brand>
+          <Navbar.Brand className="mx-4">
+            <NavLink
+              to="/about"
+              style={({ isActive }) => ({
+                textDecoration: "none",
+                color: "white",
+              })}
+            >
+              ABOUT
+            </NavLink>
+          </Navbar.Brand>
         </Container>
+        {store && (
+          <Cart className="mx-3" title={"CART"} variant="outline-info" />
+        )}
       </Navbar>
-      <div className="bg-primary text-center pb-5" >
-        
-          <h1 className='display-1 text-white '>The Generics</h1>
-        
 
-        
-      </div>
+      <main style={{ backgroundColor: "rgb(255,255,255)" }}>
+        <Bg />
+        <Outlet />
+        {/* <Footer /> */}
+      </main>
     </>
   );
 }
+
+export default NavBar

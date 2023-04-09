@@ -46,6 +46,7 @@ export default function ProductList() {
   
 
   return (
+    
     <ListGroup className="lg mx-1 mt-5">
   {productsArr.map((item, index) => {
     if (index % 2 === 0) {

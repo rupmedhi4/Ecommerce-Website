@@ -1,25 +1,51 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import Navbar from './Components/Navbar';
-import ProductList from './Components/ProductList';
-import Cart from './Components/Cart';
-import BodyText from './Components/BodyText';
-import BodyButton from './Components/BodyButton';
-import Footer from './Components/Footer';
+import React,{} from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  // Outlet,
+  // createRoutesFromElements,
+  // Route,
 
-function App() {
+} from 'react-router-dom'
+import StorePage from "./Pages/StorePage/StorePage";
+import About from "./Pages/AboutPage/About";
+import ErrorPage from "./Pages/ErrorPage";
+
+import Footer from "./Components/Footer";
+import HomePage from './Pages/HomePage/HomePage';
+
+import Navbar from './Components/Navbar'
+
+const App = () => {
+ 
+
+  
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Navbar/>
+          <Footer />
+        </>
+      ),
+      errorElement: <ErrorPage />,
+
+      children: [
+        { path: "/", element: <StorePage /> },
+        { path: "/about", element: <About /> },
+        {path : '/home', element : <HomePage/>},
+      ],
+    },
+  ]);
+
   return (
     <>
-      <Navbar />
-      <BodyText/>
-      <ProductList />
-      <Cart/>
-      <BodyButton/>
-      <Footer/>
-      
+      <RouterProvider router={router} />
+      {/* <Swithch */}
     </>
   );
-}
+};
 
 export default App;
